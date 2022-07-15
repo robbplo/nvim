@@ -75,18 +75,8 @@ return require('packer').startup(function(use)
     'takac/vim-hardtime',
     config = function()
       vim.g.hardtime_default_on = 1
+      vim.g.hardtime_showmsg = 1
     end
-  }
-
-  -- Testing
-  use {
-    "nvim-neotest/neotest",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      "vim-test/vim-test"
-    }
   }
 
   -- Elixir
