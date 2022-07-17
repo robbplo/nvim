@@ -6,7 +6,7 @@ elixir.setup({
     dialyzerEnabled = true,
     fetchDeps = true,
     enableTestLenses = true,
-    suggestSpecs = false,
+    suggestSpecs = true,
   }),
 
   on_attach = function(client, bufnr)

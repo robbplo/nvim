@@ -9,7 +9,8 @@ end
 
 local function vmap(lhs, rhs, opts) map('v', lhs, rhs, opts) end
 local function nmap(lhs, rhs, opts) map('n', lhs, rhs, opts) end
--- local function imap(lhs, rhs, opts) map('i', lhs, rhs, opts) end
+local function imap(lhs, rhs, opts) map('i', lhs, rhs, opts) end
+local function cmap(lhs, rhs, opts) map('i', lhs, rhs, opts) end
 
 vim.g.mapleader = " "
 
@@ -24,13 +25,24 @@ nmap('<C-j>', '<C-w>j')
 nmap('<C-k>', '<C-w>k')
 nmap('<C-l>', '<C-w>l')
 
+imap('kj', "<Esc>")
+vmap('kj', "<Esc>")
+cmap('kj', "<Esc>")
+
 nmap('<leader><c-r>', ':source ~/.config/nvim/init.lua<cr>')
 vmap('<leader>y', '"+y')
 nmap('<leader>y', '"+yy')
 nmap('<leader>n', ':NvimTreeToggle<cr>')
 
-nmap('<leader>[', ':bprevious<cr>')
-nmap('<leader>]', ':bnext<cr>')
+nmap('<C-Left>', ':bprevious<cr>')
+nmap('<C-Right>', ':bnext<cr>')
+nmap('<C-Up>', ':Telescope buffers<cr>')
+nmap('<C-Down>', ':bdelete<cr>')
+
+nmap('<S-Left>', ':vertical resize -1<cr>')
+nmap('<S-Right>', ':vertical resize +1<cr>')
+nmap('<S-Up>', ':resize -1<cr>')
+nmap('<S-Down>', ':resize +1<cr>')
 
 nmap('<leader>p', ':PackerSync<cr>')
 
