@@ -63,12 +63,7 @@ return require('packer').startup(function(use)
   -- Themes
   --use 'folke/tokyonight.nvim'
   use "savq/melange"
-
-  -- Dashboard
-  use {
-    'goolord/alpha-nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-  }
+  use "morhetz/gruvbox"
 
   -- Hardmode
   use {
