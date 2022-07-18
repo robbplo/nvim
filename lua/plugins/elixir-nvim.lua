@@ -23,10 +23,6 @@ elixir.setup({
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<space>e', vim.diagnostic.show, opts)
-    vim.keymap.set('n', '[d', vim.lsp.diagnostic.goto_prev, opts)
-    vim.keymap.set('n', ']d', vim.lsp.diagnostic.goto_next, opts)
-    vim.keymap.set('n', '<space>q', vim.lsp.diagnostic.set_loclist, opts)
-    vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, opts)
     -- run the codelens under the cursor
     vim.keymap.set("n", "<space>r",  vim.lsp.codelens.run, map_opts)
     -- remove the pipe operator
