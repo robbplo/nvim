@@ -16,10 +16,7 @@ if not lsp_status_ok then
   return
 end
 
-local cmp_status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not cmp_status_ok then
-  return
-end
+local coq = require('coq')
 
 -- Diagnostic options, see: `:help vim.diagnostic.config`
 vim.diagnostic.config({ virtual_text = true })
@@ -29,10 +26,7 @@ vim.cmd([[
   autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
 ]])
 
--- Add additional capabilities supported by nvim-cmp
--- See: https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -53,9 +47,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
   -- Highlighting references
   if client.server_capabilities.document_highlight then
     vim.api.nvim_exec([[
@@ -66,9 +57,6 @@ local on_attach = function(client, bufnr)
       augroup END
     ]], false)
   end
-
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
   local opts = { noremap = true, silent = true }
@@ -116,22 +104,18 @@ local servers = {
   'tailwindcss', 'phpactor', 'eslint', 'jsonls'
 }
 
+
 -- Call setup
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    -- root_dir = root_dir,
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+  local setup_config = {
+  -- root_dir = root_dir,
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+  lspconfig[lsp].setup(coq.lsp_ensure_capabilities(setup_config))
 end
 
--- lspconfig['elixirls'].setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
---   cmd = { '/Users/robbinploeger/bin/elixir-ls/language_server.sh' }
--- }
-
-lspconfig['sumneko_lua'].setup {
+lspconfig['sumneko_lua'].setup(coq.lsp_ensure_capabilities {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -141,4 +125,4 @@ lspconfig['sumneko_lua'].setup {
       }
     }
   }
-}
+})

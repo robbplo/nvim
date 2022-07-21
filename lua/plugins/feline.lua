@@ -1,4 +1,4 @@
 local mod = require('feline')
 
-mod.winbar.setup()
 mod.setup()
+mod.winbar.setup()

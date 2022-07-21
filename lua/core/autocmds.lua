@@ -17,18 +17,6 @@ autocmd('TextYankPost', {
   end
 })
 
--- Remove whitespace on save
-autocmd('BufWritePre', {
-  pattern = '*',
-  command = ":%s/\\s\\+$//e"
-})
-
--- Don't auto commenting new lines
-autocmd('BufEnter', {
-  pattern = '*',
-  command = 'set fo-=c fo-=r fo-=o'
-})
-
 -- Set indentation to 2 spaces
 augroup('setIndent', { clear = true })
 autocmd('Filetype', {
@@ -39,27 +27,4 @@ autocmd('Filetype', {
   command = 'setlocal shiftwidth=2 tabstop=2'
 })
 
--- Terminal settings:
--- Open a Terminal on the right tab
-autocmd('CmdlineEnter', {
-  command = 'command! Term :botright vsplit term://$SHELL'
-})
-
--- Enter insert mode when switching to terminal
-autocmd('TermOpen', {
-  command = 'setlocal listchars= nonumber norelativenumber nocursorline',
-})
-
-autocmd('TermOpen', {
-  pattern = '*',
-  command = 'startinsert'
-})
-
--- Close terminal buffer on process exit
-autocmd('BufLeave', {
-  pattern = 'term://*',
-  command = 'stopinsert'
-})
-
 ---- File specific
-

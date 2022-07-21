@@ -16,17 +16,12 @@ return require('packer').startup(function(use)
 
   -- LSP and autocomplete
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-
-  -- Snippets
-  use 'L3MON4D3/LuaSnip'
+  use { 'ms-jpq/coq_nvim', run = ':QOCDeps' }
+  use 'ms-jpq/coq.artifacts'
+  use 'ms-jpq/coq.thirdparty'
 
   -- Indentation guides
-  use "lukas-reineke/indent-blankline.nvim"
+  use 'lukas-reineke/indent-blankline.nvim'
 
   -- Auto close brackets
   use {
@@ -52,7 +47,7 @@ return require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- Highligting for specific languages
-  use "fladson/vim-kitty"
+  use 'fladson/vim-kitty'
 
   -- Statusline
   use {
@@ -60,10 +55,12 @@ return require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons' },
   }
 
-  -- Themes
-  --use 'folke/tokyonight.nvim'
-  use "savq/melange"
-  use "morhetz/gruvbox"
+
+  -- Color schemes
+  use 'folke/tokyonight.nvim'
+  use 'savq/melange'
+  use 'morhetz/gruvbox'
+  use 'overcache/NeoSolarized'
 
   -- Hardmode
   use {
@@ -75,5 +72,5 @@ return require('packer').startup(function(use)
   }
 
   -- Elixir
-  use { "mhanberg/elixir.nvim", requires = { "nvim-lua/plenary.nvim" } }
+  use { 'mhanberg/elixir.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 end)
