@@ -75,5 +75,12 @@ return require('packer').startup(function(use)
   }
 
   -- Elixir
-  use { "mhanberg/elixir.nvim", requires = { "nvim-lua/plenary.nvim" } }
+  use 'elixir-editors/vim-elixir'
+  use {
+    'mhinz/vim-mix-format',
+    config = function()
+      vim.g.mix_format_on_save = 1
+    end
+  }
+  use 'tpope/vim-endwise'
 end)
