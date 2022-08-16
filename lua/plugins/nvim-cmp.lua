@@ -1,4 +1,4 @@
------------------------------------------------------------
+-----------------------------------------------------------cmp
 -- Autocomplete configuration file
 -----------------------------------------------------------
 
@@ -38,13 +38,13 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
+    ['<Tab>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
 
     -- Tab mapping
-    ['<Tab>'] = function(fallback)
+    ['<Up>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -53,7 +53,7 @@ cmp.setup {
         fallback()
       end
     end,
-    ['<S-Tab>'] = function(fallback)
+    ['<Down>'] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
