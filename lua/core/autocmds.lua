@@ -61,5 +61,11 @@ autocmd('BufLeave', {
   command = 'stopinsert'
 })
 
+-- Autosave on focust lost
+autocmd('FocusLost', {
+  command = 'wa',
+  pattern = '*.*'
+})
+
 ---- File specific
 

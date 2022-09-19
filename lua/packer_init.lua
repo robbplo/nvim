@@ -1,4 +1,5 @@
 return require('packer').startup(function(use)
+
   -- https://github.com/wbthomason/packer.nvim
 
   -- Packer can manage itself
@@ -39,6 +40,9 @@ return require('packer').startup(function(use)
   -- Surround
   use 'tpope/vim-surround'
 
+  -- Focus events
+  use 'tmux-plugins/vim-tmux-focus-events'
+
   -- Git labels
   use {
     'lewis6991/gitsigns.nvim',
@@ -56,8 +60,8 @@ return require('packer').startup(function(use)
 
   -- Statusline
   use {
-    'feline-nvim/feline.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' }
   }
 
   -- Themes
@@ -69,7 +73,7 @@ return require('packer').startup(function(use)
   use {
     'takac/vim-hardtime',
     config = function()
-      vim.g.hardtime_default_on = 1
+      vim.g.hardtime_default_on = 0
       vim.g.hardtime_showmsg = 1
     end
   }

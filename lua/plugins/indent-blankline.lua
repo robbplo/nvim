@@ -12,9 +12,9 @@ if not status_ok then
 end
 
 indent_blankline.setup {
-  char = "▏",
+  char = "¦",
   use_treesitter = true,
-  show_first_indent_level = false,
+  show_first_indent_level = true,
   filetype_exclude = {
     'help',
     'dashboard',

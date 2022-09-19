@@ -89,16 +89,6 @@ end
 Language servers setup:
 For language servers list see:
 https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-Bash --> bashls
-https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
-Python --> pyright
-https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
-C-C++ --> clangd
-https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd
-HTML/CSS/JSON --> vscode-html-languageserver
-https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#html
-JavaScript/TypeScript --> tsserver
-https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 --]]
 
 -- Define `root_dir` when needed
@@ -113,23 +103,25 @@ https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.m
 -- Add your language server below:
 local servers = {
   'bashls', 'pyright', 'html', 'cssls', 'tsserver', 'emmet_ls',
-  'tailwindcss', 'phpactor', 'eslint', 'jsonls'
+  'tailwindcss', 'phpactor', 'eslint', 'jsonls', 'elixirls'
 }
 
 -- Call setup
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
-    -- root_dir = root_dir,
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
 
--- lspconfig['elixirls'].setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
---   cmd = { '/Users/robbinploeger/bin/elixir-ls/language_server.sh' }
--- }
+local util = require 'lspconfig.util'
+
+
+lspconfig['elixirls'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { '/Users/robbinploeger/bin/elixir-ls/language_server.sh' }
+}
 
 lspconfig['sumneko_lua'].setup {
   on_attach = on_attach,

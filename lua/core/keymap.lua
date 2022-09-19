@@ -25,18 +25,16 @@ nmap('<C-j>', '<C-w>j')
 nmap('<C-k>', '<C-w>k')
 nmap('<C-l>', '<C-w>l')
 
-imap('kj', "<Esc>")
-vmap('kj', "<Esc>")
-cmap('kj', "<Esc>")
-
 nmap('<leader><c-r>', ':source ~/.config/nvim/init.lua<cr>')
 vmap('<leader>y', '"+y')
 nmap('<leader>y', '"+yy')
 nmap('<leader>n', ':NvimTreeToggle<cr>')
+nmap('<leader>w', ':w<cr>')
+
+nmap('<C-n>', ':let @/ = ""<cr>')
 
 nmap('<C-Left>', ':bprevious<cr>')
 nmap('<C-Right>', ':bnext<cr>')
-nmap('<C-Up>', ':Telescope buffers<cr>')
 nmap('<C-Down>', ':bdelete<cr>')
 
 nmap('<S-Left>', ':vertical resize -1<cr>')
@@ -46,6 +44,9 @@ nmap('<S-Down>', ':resize +1<cr>')
 
 nmap('<leader>p', ':PackerSync<cr>')
 
-nmap('<C-p>', ':Telescope find_files<cr>')
-nmap('<cr>', ':let @/ = ""<cr>')
+nmap('<leader><C-p>', ':lua require("telescope.builtin").find_files({ hidden = true, no_ignore = true})<cr>')
+nmap('<cr>', ':')
 
+nmap('<C-Up>', ':Telescope buffers<cr>')
+nmap('<C-p>', ':Telescope find_files<cr>')
+nmap('<leader>f', ':Telescope live_grep<cr>')
