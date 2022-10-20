@@ -23,6 +23,14 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
 
+  -- Language server management
+  use {
+    "williamboman/mason.nvim",
+    config = function()
+      require('mason').setup()
+    end
+  }
+
   -- Snippets
   use 'L3MON4D3/LuaSnip'
 

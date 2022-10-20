@@ -31,8 +31,7 @@ vim.cmd([[
 
 -- Add additional capabilities supported by nvim-cmp
 -- See: https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
 capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -102,8 +101,8 @@ https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.m
 -- map buffer local keybindings when the language server attaches.
 -- Add your language server below:
 local servers = {
-  'bashls', 'pyright', 'html', 'cssls', 'tsserver', 'emmet_ls',
-  'tailwindcss', 'phpactor', 'eslint', 'jsonls', 'elixirls'
+  'bashls', 'html', 'cssls', 'tsserver', 'emmet_ls',
+  'phpactor', 'eslint', 'jsonls', 'elixirls'
 }
 
 -- Call setup
@@ -116,11 +115,10 @@ end
 
 local util = require 'lspconfig.util'
 
-
 lspconfig['elixirls'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = { '/Users/robbinploeger/bin/elixir-ls/language_server.sh' }
+  cmd = { '/home/robbin/.local/share/nvim/mason/bin/elixir-ls' }
 }
 
 lspconfig['sumneko_lua'].setup {
