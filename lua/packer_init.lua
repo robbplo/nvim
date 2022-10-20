@@ -66,6 +66,12 @@ return require('packer').startup(function(use)
   -- Highligting for specific languages
   use "fladson/vim-kitty"
 
+  -- Tab bar
+  use {
+    'romgrk/barbar.nvim',
+    requires = {'kyazdani42/nvim-web-devicons'}
+  }
+
   -- Statusline
   use {
     'nvim-lualine/lualine.nvim',

@@ -20,10 +20,9 @@ nmap('<leader>j', '<C-w>j')
 nmap('<leader>k', '<C-w>k')
 nmap('<leader>l', '<C-w>l')
 
-nmap('<C-h>', '<C-w>h')
-nmap('<C-j>', '<C-w>j')
-nmap('<C-k>', '<C-w>k')
-nmap('<C-l>', '<C-w>l')
+nmap('<C-h>', ':BufferPrevious<cr>')
+nmap('<C-l>', ':BufferNext<cr>')
+nmap('<C-j>', ':BufferClose<cr>')
 
 nmap('<leader><c-r>', ':source ~/.config/nvim/init.lua<cr>')
 vmap('<leader>y', '"+y')
@@ -34,10 +33,10 @@ nmap('<leader>w', ':w<cr>')
 
 nmap('<C-n>', ':let @/ = ""<cr>')
 
-nmap('<C-Left>', ':bprevious<cr>')
-nmap('<C-Right>', ':bnext<cr>')
-nmap('<C-Down>', ':bp<bar>sp<bar>bn<bar>bd<CR>')
--- nmap('<C-Down>', ':bdelete<cr>')
+-- Barbar
+nmap('<C-Left>', ':BufferMovePrevious<cr>')
+nmap('<C-Right>', ':BufferMoveNext<cr>')
+nmap('<C-Down>', ':BufferClose<cr>')
 
 nmap('<S-Left>', ':vertical resize -1<cr>')
 nmap('<S-Right>', ':vertical resize +1<cr>')
