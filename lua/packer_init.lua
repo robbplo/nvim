@@ -79,7 +79,7 @@ return require('packer').startup(function(use)
   }
 
   -- Themes
-  --use 'folke/tokyonight.nvim'
+  use 'folke/tokyonight.nvim'
   use "savq/melange"
   use "morhetz/gruvbox"
 

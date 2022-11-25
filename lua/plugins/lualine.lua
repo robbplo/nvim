@@ -1,5 +1,5 @@
 require('lualine').setup({
-  theme = 'gruvbox',
+  theme = 'tokyonight',
   globalstatus = true
 })
 
