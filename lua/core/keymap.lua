@@ -22,7 +22,7 @@ nmap('<leader>l', '<C-w>l')
 
 nmap('<leader><c-r>', ':source ~/.config/nvim/init.lua<cr>')
 vmap('<leader>y', '"+y')
-nmap('<leader>y', '"+yy')
+nmap('<leader>y', '"+y')
 nmap('<leader>n', ':NvimTreeToggle<cr>')
 nmap('<leader>N', ':NvimTreeFindFile<cr>')
 nmap('<leader>w', ':w<cr>')
@@ -51,6 +51,7 @@ nmap('<A-0>', '<Cmd>BufferLast<CR>')
 nmap('<A-p>', '<Cmd>BufferPin<CR>')
 -- Close buffer
 nmap('<A-c>', '<Cmd>BufferClose<CR>')
+nmap('<A-C>', '<Cmd>BufferCloseAllButCurrentOrPinned<CR>')
 ----
 
 nmap('<S-Left>', ':vertical resize -1<cr>')
@@ -68,5 +69,8 @@ nmap('<C-p>', ':Telescope find_files<cr>')
 nmap('<leader><C-p>', ':lua require("telescope.builtin").find_files({ hidden = true, no_ignore = true})<cr>')
 nmap('<leader>f', ':Telescope live_grep<cr>')
 
+-- Git stuff
 nmap('gb', ':Gitsigns blame_line<cr>')
+nmap('g[', ':Gitsigns prev_hunk<cr>')
+nmap('g]', ':Gitsigns next_hunk<cr>')
 nmap('gs', ':Telescope git_status<cr>')
