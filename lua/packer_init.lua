@@ -75,9 +75,6 @@ return require('packer').startup(function(use)
   -- Highlighting
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
-  -- Highligting for specific languages
-  use "fladson/vim-kitty"
-
   -- Tab bar
   use {
     'romgrk/barbar.nvim',
@@ -104,6 +101,8 @@ return require('packer').startup(function(use)
     end
   }
 
+  ---- Language specific
+
   -- Elixir
   use 'elixir-editors/vim-elixir'
   use {
@@ -113,4 +112,11 @@ return require('packer').startup(function(use)
     end
   }
   use 'tpope/vim-endwise'
+
+  -- Kitty
+  use "fladson/vim-kitty"
+
+  -- Fish shell
+  use "dag/vim-fish"
+
 end)
