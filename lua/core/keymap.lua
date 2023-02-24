@@ -1,76 +1,91 @@
 -- Functional wrapper for mapping custom keybindings
-local function map(mode, lhs, rhs, opts)
+local function mapfun(mode)
+  return function (lhs, rhs, opts)
     local options = { noremap = true }
     if opts then
         options = vim.tbl_extend("force", options, opts)
     end
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  end
 end
 
-local function vmap(lhs, rhs, opts) map('v', lhs, rhs, opts) end
-local function nmap(lhs, rhs, opts) map('n', lhs, rhs, opts) end
---local function imap(lhs, rhs, opts) map('i', lhs, rhs, opts) end
---local function cmap(lhs, rhs, opts) map('c', lhs, rhs, opts) end
---local function omap(lhs, rhs, opts) map('o', lhs, rhs, opts) end
+local nmap = mapfun('n')
+local map = mapfun('')
 
 vim.g.mapleader = " "
--- Navigate panes
+
+---- General
+nmap('<leader>p', '<cmd>PackerSync<cr>')
+map('<leader>y', '"+y')
+nmap('<leader>w', '<cmd>w<cr>')
+
+nmap('<cr>', ':')
+nmap('<C-n>', '<cmd>let @/ = ""<cr>')
+
+---- Panes
+-- Resize
+nmap('<S-Left>', '<cmd>vertical resize -1<cr>')
+nmap('<S-Right>', '<cmd>vertical resize +1<cr>')
+nmap('<S-Up>', '<cmd>resize -1<cr>')
+nmap('<S-Down>', '<cmd>resize +1<cr>')
+
+-- Navigate
 nmap('<leader>h', '<C-w>h')
 nmap('<leader>j', '<C-w>j')
 nmap('<leader>k', '<C-w>k')
 nmap('<leader>l', '<C-w>l')
 
-nmap('<leader><c-r>', ':source ~/.config/nvim/init.lua<cr>')
-vmap('<leader>y', '"+y')
-nmap('<leader>y', '"+y')
-nmap('<leader>n', ':NvimTreeToggle<cr>')
-nmap('<leader>N', ':NvimTreeFindFile<cr>')
-nmap('<leader>w', ':w<cr>')
-
-nmap('<C-n>', ':let @/ = ""<cr>')
-
 ---- Barbar
--- Move to previous/next
-nmap('<A-h>', '<Cmd>BufferPrevious<CR>')
-nmap('<A-l>', '<Cmd>BufferNext<CR>')
--- Re-order to previous/next
-nmap('<A-Left>', '<Cmd>BufferMovePrevious<CR>')
-nmap('<A-Right>', '<Cmd>BufferMoveNext<CR>')
+-- Move to previous/next buffer
+map('<A-h>', '<cmd>BufferPrevious<cr>')
+map('<A-l>', '<cmd>BufferNext<cr>')
+-- Re-order to previous/next buffer
+map('<A-Left>', '<cmd>BufferMovePrevious<cr>')
+map('<A-Right>', '<cmd>BufferMoveNext<cr>')
 -- Goto buffer in position...
-nmap('<A-1>', '<Cmd>BufferGoto 1<CR>')
-nmap('<A-2>', '<Cmd>BufferGoto 2<CR>')
-nmap('<A-3>', '<Cmd>BufferGoto 3<CR>')
-nmap('<A-4>', '<Cmd>BufferGoto 4<CR>')
-nmap('<A-5>', '<Cmd>BufferGoto 5<CR>')
-nmap('<A-6>', '<Cmd>BufferGoto 6<CR>')
-nmap('<A-7>', '<Cmd>BufferGoto 7<CR>')
-nmap('<A-8>', '<Cmd>BufferGoto 8<CR>')
-nmap('<A-9>', '<Cmd>BufferGoto 9<CR>')
-nmap('<A-0>', '<Cmd>BufferLast<CR>')
+map('<A-1>', '<cmd>BufferGoto 1<cr>')
+map('<A-2>', '<cmd>BufferGoto 2<cr>')
+map('<A-3>', '<cmd>BufferGoto 3<cr>')
+map('<A-4>', '<cmd>BufferGoto 4<cr>')
+map('<A-5>', '<cmd>BufferGoto 5<cr>')
+map('<A-6>', '<cmd>BufferGoto 6<cr>')
+map('<A-7>', '<cmd>BufferGoto 7<cr>')
+map('<A-8>', '<cmd>BufferGoto 8<cr>')
+map('<A-9>', '<cmd>BufferGoto 9<cr>')
+map('<A-0>', '<cmd>BufferLast<cr>')
 -- Pin/unpin buffer
-nmap('<A-p>', '<Cmd>BufferPin<CR>')
+map('<A-p>', '<cmd>BufferPin<cr>')
 -- Close buffer
-nmap('<A-c>', '<Cmd>BufferClose<CR>')
-nmap('<A-C>', '<Cmd>BufferCloseAllButCurrentOrPinned<CR>')
-----
+map('<A-c>', '<cmd>BufferClose<cr>')
+map('<A-C>', '<cmd>BufferCloseAllButCurrentOrPinned<cr>')
 
-nmap('<S-Left>', ':vertical resize -1<cr>')
-nmap('<S-Right>', ':vertical resize +1<cr>')
-nmap('<S-Up>', ':resize -1<cr>')
-nmap('<S-Down>', ':resize +1<cr>')
+---- Trouble
+nmap('<leader>xx', '<cmd>TroubleToggle<cr>')
+nmap('<leader>xw', '<cmd>TroubleToggle workspace_diagnostics<cr>')
+nmap('<leader>xd', '<cmd>TroubleToggle document_diagnostics<cr>')
+nmap('<leader>xq', '<cmd>TroubleToggle quickfix<cr>')
+nmap('<leader>xl', '<cmd>TroubleToggle loclist<cr>')
+nmap('<leader>xn', '<cmd>lua require("trouble").next({skip_groups = true, jump = true})<cr>')
+nmap('<leader>xp', '<cmd>lua require("trouble").previous({skip_groups = true, jump = true})<cr>')
 
-nmap('<leader>p', ':PackerSync<cr>')
+---- Tree view
+nmap('<leader>n', '<cmd>NvimTreeToggle<cr>')
+nmap('<leader>N', '<cmd>NvimTreeFindFile<cr>')
 
+---- Telescope
+nmap('<leader>T', '<cmd>Telescope<cr>')
+nmap('<leader>tt', '<cmd>Telescope resume<cr>')
+nmap('<leader>tp', '<cmd>Telescope find_files<cr>')
+nmap('<leader>tP', '<cmd>lua require("telescope.builtin").find_files({ hidden = true, no_ignore = true})<cr>')
+nmap('<leader>tf', '<cmd>Telescope live_grep<cr>')
 
-nmap('<cr>', ':')
+---- Git
+nmap('<leader>g[', '<cmd>Gitsigns prev_hunk<cr>')
+nmap('<leader>g]', '<cmd>Gitsigns next_hunk<cr>')
+nmap('<leader>gb', '<cmd>Gitsigns blame_line<cr>')
+nmap('<leader>gd', '<cmd>Gitsigns diffthis<cr>')
+nmap('<leader>gr', '<cmd>Gitsigns reset_hunk<cr>')
 
-nmap('<C-Up>', ':Telescope buffers<cr>')
-nmap('<C-p>', ':Telescope find_files<cr>')
-nmap('<leader><C-p>', ':lua require("telescope.builtin").find_files({ hidden = true, no_ignore = true})<cr>')
-nmap('<leader>f', ':Telescope live_grep<cr>')
-
--- Git stuff
-nmap('gb', ':Gitsigns blame_line<cr>')
-nmap('g[', ':Gitsigns prev_hunk<cr>')
-nmap('g]', ':Gitsigns next_hunk<cr>')
-nmap('gs', ':Telescope git_status<cr>')
+-- Telescope mappings
+nmap('<leader>gs', '<cmd>Telescope git_status<cr>')
+nmap('<leader>gB', '<cmd>Telescope git_branches<cr>')
