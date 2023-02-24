@@ -109,7 +109,7 @@ https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.m
 -- Add your language server below:
 local servers = {
   'bashls', 'html', 'cssls', 'tsserver', 'emmet_ls',
-  'phpactor', 'eslint', 'jsonls', 'elixirls'
+  'phpactor', 'eslint', 'jsonls'
 }
 
 -- Call setup
@@ -125,7 +125,10 @@ local util = require 'lspconfig.util'
 lspconfig['elixirls'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = { '/home/robbin/.local/share/nvim/mason/bin/elixir-ls' }
+  -- cmd = { '/home/robbin/.local/share/nvim/mason/bin/elixir-ls' }
+  --root_dir = util.root_pattern("../../mix.exs") or util.root_pattern("mix.exs", ".git") or vim.loop.os_homedir(),
+  cmd = { '/home/robbin/Downloads/elixirls/language_server.sh' },
+  settings = {}
 }
 
 lspconfig['sumneko_lua'].setup {
