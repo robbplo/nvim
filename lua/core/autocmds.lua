@@ -34,7 +34,7 @@ augroup('setIndent', { clear = true })
 autocmd('Filetype', {
   group = 'setIndent',
   pattern = { 'xml', 'html', 'xhtml', 'css', 'scss', 'javascript', 'typescript',
-    'yaml', 'lua'
+    'yaml', 'lua', 'json'
   },
   command = 'setlocal shiftwidth=2 tabstop=2'
 })
@@ -61,8 +61,15 @@ autocmd('BufLeave', {
   command = 'stopinsert'
 })
 
--- Autosave on focust lost
+-- Autosave
+augroup('AutoSave', { clear = true })
 autocmd('FocusLost', {
+  group = 'AutoSave',
+  command = 'wa',
+  pattern = '*.*'
+})
+autocmd('BufLeave', {
+  group = 'AutoSave',
   command = 'wa',
   pattern = '*.*'
 })
