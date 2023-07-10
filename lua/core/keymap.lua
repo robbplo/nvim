@@ -19,8 +19,9 @@ nmap('<leader>p', '<cmd>PackerSync<cr>')
 map('<leader>y', '"+y')
 nmap('<leader>w', '<cmd>w<cr>')
 
+nmap('<leader>cf', '<cmd>let @+=@%<cr>')
+
 nmap('<cr>', ':')
-nmap('<C-n>', '<cmd>let @/ = ""<cr>')
 
 ---- Panes
 -- Resize
@@ -78,6 +79,7 @@ nmap('<leader>tt', '<cmd>Telescope resume<cr>')
 nmap('<leader>tp', '<cmd>Telescope find_files<cr>')
 nmap('<leader>tP', '<cmd>lua require("telescope.builtin").find_files({ hidden = true, no_ignore = true})<cr>')
 nmap('<leader>tf', '<cmd>Telescope live_grep<cr>')
+nmap('<leader>tF', '<cmd>lua require("telescope.builtin").live_grep({ no_ignore = true})<cr>')
 
 ---- Git
 nmap('<leader>g[', '<cmd>Gitsigns prev_hunk<cr>')

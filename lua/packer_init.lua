@@ -129,6 +129,8 @@ return require('packer').startup(function(use)
   }
   use 'tpope/vim-endwise'
 
+  use 'tpope/vim-abolish'
+
   -- Kitty
   use "fladson/vim-kitty"
 

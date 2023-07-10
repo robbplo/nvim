@@ -109,7 +109,8 @@ https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.m
 -- Add your language server below:
 local servers = {
   'bashls', 'html', 'cssls', 'tsserver', 'emmet_ls',
-  'phpactor', 'eslint', 'jsonls', 'rnix'
+  'phpactor', 'eslint', 'jsonls', 'rnix', 'docker_compose_language_service',
+  'dockerls'
 }
 
 -- Call setup
@@ -125,11 +126,7 @@ local util = require 'lspconfig.util'
 lspconfig['elixirls'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = { '/home/robbin/.local/share/nvim/mason/bin/elixir-ls' },
-  settings = {
-    dialyzerFormat = 'dialyxir_long',
-    enableTestLenses = true
-  }
+  cmd = { '/home/robbin/.local/share/nvim/mason/bin/elixir-ls' }
 }
 
 lspconfig['lua_ls'].setup {

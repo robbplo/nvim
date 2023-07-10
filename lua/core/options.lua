@@ -12,7 +12,6 @@ vim.o.shiftwidth = 2
 vim.o.mouse = nil
 
 -- Timers
-vim.o.cc = 100
 vim.o.timeoutlen = 500
 vim.o.updatetime = 2000
 
