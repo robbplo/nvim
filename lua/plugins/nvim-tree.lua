@@ -1,7 +1,1 @@
-require("nvim-tree").setup({
-  view = {
-    width = {
-      padding = 0,
-    }
-  }
-})
+require("nvim-tree").setup()

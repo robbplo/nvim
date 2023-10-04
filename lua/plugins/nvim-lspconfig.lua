@@ -59,7 +59,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Highlighting references
@@ -91,6 +90,72 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', "<cmd>TroubleToggle lsp_references<cr>", opts)
 end
 
+---- Auto formatting
+-- Switch for controlling whether you want autoformatting.
+    --  Use :KickstartFormatToggle to toggle autoformatting on or off
+    local format_is_enabled = true
+    vim.api.nvim_create_user_command('KickstartFormatToggle', function()
+      format_is_enabled = not format_is_enabled
+      print('Setting autoformatting to: ' .. tostring(format_is_enabled))
+    end, {})
+
+    -- Create an augroup that is used for managing our formatting autocmds.
+    --      We need one augroup per client to make sure that multiple clients
+    --      can attach to the same buffer without interfering with each other.
+    local _augroups = {}
+    local get_augroup = function(client)
+      if not _augroups[client.id] then
+        local group_name = 'kickstart-lsp-format-' .. client.name
+        local id = vim.api.nvim_create_augroup(group_name, { clear = true })
+        _augroups[client.id] = id
+      end
+
+      return _augroups[client.id]
+    end
+
+    -- Whenever an LSP attaches to a buffer, we will run this function.
+    --
+    -- See `:help LspAttach` for more information about this autocmd event.
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('kickstart-lsp-attach-format', { clear = true }),
+      -- This is where we attach the autoformatting for reasonable clients
+      callback = function(args)
+        local client_id = args.data.client_id
+        local client = vim.lsp.get_client_by_id(client_id)
+        local bufnr = args.buf
+
+        -- Only attach to clients that support document formatting
+        if not client.server_capabilities.documentFormattingProvider then
+          return
+        end
+
+        -- Tsserver usually works poorly. Sorry you work with bad languages
+        -- You can remove this line if you know what you're doing :)
+        if client.name == 'tsserver' then
+          return
+        end
+
+        -- Create an autocmd that will run *before* we save the buffer.
+        --  Run the formatting command for the LSP that has just attached.
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          group = get_augroup(client),
+          buffer = bufnr,
+          callback = function()
+            if not format_is_enabled then
+              return
+            end
+
+            vim.lsp.buf.format {
+              async = false,
+              filter = function(c)
+                return c.id == client.id
+              end,
+            }
+          end,
+        })
+      end})
+
+
 --[[
 Language servers setup:
 For language servers list see:
@@ -110,7 +175,7 @@ https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.m
 local servers = {
   'bashls', 'html', 'cssls', 'tsserver', 'emmet_ls',
   'phpactor', 'eslint', 'jsonls', 'rnix', 'docker_compose_language_service',
-  'dockerls'
+  'dockerls', 'gopls', 'lua_ls'
 }
 
 -- Call setup
@@ -129,14 +194,3 @@ lspconfig['elixirls'].setup {
   cmd = { '/home/robbin/.local/share/nvim/mason/bin/elixir-ls' }
 }
 
-lspconfig['lua_ls'].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim', 'redis', 'ARGV', 'KEYS' }
-      }
-    }
-  }
-}

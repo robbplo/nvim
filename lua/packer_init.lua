@@ -13,8 +13,6 @@ end
 local packer_bootstrapped = ensure_packer()
 
 return require('packer').startup(function(use)
-  -- https://github.com/wbthomason/packer.nvim
-
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
@@ -39,6 +37,24 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
 
+  -- Testing
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "jfpedroza/neotest-elixir",
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-elixir"),
+        }
+      })
+    end
+  }
+
   -- Language server management
   use {
     "williamboman/mason.nvim",
@@ -55,16 +71,8 @@ return require('packer').startup(function(use)
   use "lukas-reineke/indent-blankline.nvim"
 
   -- Keymap hints
-  use {
-    "folke/which-key.nvim",
-    config = function()
-      require("which-key").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
-  }
+  use "folke/which-key.nvim"
+
 
   -- Auto close brackets
   use {
@@ -106,27 +114,12 @@ return require('packer').startup(function(use)
   use "savq/melange"
   use "morhetz/gruvbox"
 
-  -- Hardmode
-  use {
-    'takac/vim-hardtime',
-    config = function()
-      vim.g.hardtime_default_on = 0
-      vim.g.hardtime_showmsg = 0
-    end
-  }
+  --- Language specific
 
-  ---- Language specific
+  -- Neovim
+  use 'folke/neodev.nvim'
 
   -- Elixir
-  use 'elixir-editors/vim-elixir'
-
-  use {
-    'mhinz/vim-mix-format',
-    config = function()
-      vim.g.mix_format_on_save = 1
-      vim.g.mix_format_silent_errors = 1
-    end
-  }
   use 'tpope/vim-endwise'
 
   use 'tpope/vim-abolish'
