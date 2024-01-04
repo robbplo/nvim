@@ -5,5 +5,5 @@ require('barbar').setup {
     NvimTree = true
   },
   focus_on_close = "right",
-  pinned = {button = '-', filename = true, separator = {right = ''}},
+  pinned = { button = '-', filename = true, separator = { right = '' } },
 }

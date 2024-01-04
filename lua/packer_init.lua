@@ -16,15 +16,8 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- File explorer
-  use 'kyazdani42/nvim-web-devicons'
-  use 'kyazdani42/nvim-tree.lua'
-
   -- File navigation
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { 'nvim-lua/plenary.nvim' }
-  }
+  use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' }
 
   -- QFlist and diagnostics list
   use 'folke/trouble.nvim'
@@ -37,24 +30,6 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
 
-  -- Testing
-  use {
-    "nvim-neotest/neotest",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      "jfpedroza/neotest-elixir",
-    },
-    config = function()
-      require("neotest").setup({
-        adapters = {
-          require("neotest-elixir"),
-        }
-      })
-    end
-  }
-
   -- Language server management
   use {
     "williamboman/mason.nvim",
@@ -62,6 +37,12 @@ return require('packer').startup(function(use)
       require('mason').setup()
     end
   }
+
+  -- File explorer
+  use "lambdalisue/fern.vim"
+
+  -- Copilot
+  use "github/copilot.vim"
 
   -- Snippets
   use 'L3MON4D3/LuaSnip'
@@ -78,62 +59,47 @@ return require('packer').startup(function(use)
     end
   }
 
-
-  -- Auto close brackets
-  use {
-    'windwp/nvim-autopairs',
-    config = function()
-      require('nvim-autopairs').setup()
-    end
-  }
+  -- Big brain replacing
+  use 'tpope/vim-abolish'
 
   -- Surround
   use 'tpope/vim-surround'
 
-  -- Focus events
-  use 'tmux-plugins/vim-tmux-focus-events'
-
   -- Git labels
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-  }
+  use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
 
-  -- Highlighting
+  -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { "nvim-treesitter/nvim-treesitter-textobjects" }
+  --use { "nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter/nvim-treesitter" }
 
   -- Tab bar
-  use {
-    'romgrk/barbar.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-  }
+  -- use { 'romgrk/barbar.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+  -- temp bugfix fork:
+  use { 'taketwo/barbar.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+
 
   -- Statusline
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' }
-  }
+  use { 'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons' }
 
   -- Themes
   use 'folke/tokyonight.nvim'
   use "savq/melange"
   use "morhetz/gruvbox"
 
-  --- Language specific
+  -- Language specific
 
-  -- Neovim
+  ---- Neovim
   use 'folke/neodev.nvim'
 
-  -- Elixir
-  use 'tpope/vim-endwise'
-
-  use 'tpope/vim-abolish'
-
-  -- Kitty
+  ---- Kitty
   use "fladson/vim-kitty"
 
-  -- Fish shell
+  ---- Fish shell
   use "dag/vim-fish"
+
+  ---- Go templ
+  use "joerdav/templ.vim"
 
   if (packer_bootstrapped) then
     require('packer').sync()
