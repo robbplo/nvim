@@ -62,17 +62,20 @@ autocmd('BufLeave', {
 })
 
 -- Autosave
+local function save_buffer()
+  if vim.api.nvim_buf_get_name(0) ~= '' then
+    vim.cmd('w')
+  end
+end
+
 augroup('AutoSave', { clear = true })
 autocmd('FocusLost', {
   group = 'AutoSave',
-  command = 'wa',
+  callback = save_buffer,
   pattern = '*.*'
 })
 autocmd('BufLeave', {
   group = 'AutoSave',
-  command = 'wa',
+  callback = save_buffer,
   pattern = '*.*'
 })
-
----- File specific
-
