@@ -26,3 +26,6 @@ vim.o.laststatus = 3
 
 -- Guide for max line length
 vim.o.colorcolumn = "100"
+
+-- Preferred line length
+vim.o.textwidth = 100
