@@ -63,8 +63,12 @@ autocmd('BufLeave', {
 
 -- Autosave
 local function save_buffer()
-  if vim.api.nvim_buf_get_name(0) ~= '' then
-    vim.cmd('w')
+  if vim.bo.modifiable
+      and vim.bo.buftype ~= 'nofile'
+      and vim.bo.filetype ~= 'gitcommit'
+      and vim.bo.filetype ~= 'gitrebase'
+      and vim.api.nvim_buf_get_name(0) ~= '' then
+    vim.cmd('silent! write')
   end
 end
 
