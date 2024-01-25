@@ -64,6 +64,7 @@ autocmd('BufLeave', {
 -- Autosave
 local function save_buffer()
   if vim.bo.modifiable
+      and vim.api.nvim_get_all_options_info()['modified']
       and vim.bo.buftype ~= 'nofile'
       and vim.bo.filetype ~= 'gitcommit'
       and vim.bo.filetype ~= 'gitrebase'
