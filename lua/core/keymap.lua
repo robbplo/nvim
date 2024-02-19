@@ -34,9 +34,8 @@ nmap('<S-Down>', '<cmd>resize +1<cr>')
 ---- Move to previous/next buffer
 map('<A-h>', '<cmd>BufferPrevious<cr>')
 map('<A-l>', '<cmd>BufferNext<cr>')
----- Re-order to previous/next buffer
-map('<A-Left>', '<cmd>BufferMovePrevious<cr>')
-map('<A-Right>', '<cmd>BufferMoveNext<cr>')
+map('<A-Left>', '<cmd>BufferPrevious<cr>')
+map('<A-Right>', '<cmd>BufferNext<cr>')
 ---- Goto buffer in position...
 map('<A-1>', '<cmd>BufferGoto 1<cr>')
 map('<A-2>', '<cmd>BufferGoto 2<cr>')
