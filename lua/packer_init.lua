@@ -18,6 +18,7 @@ return require('packer').startup(function(use)
 
   -- File navigation
   use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use "stevearc/oil.nvim"
 
   -- QFlist and diagnostics list
   use 'folke/trouble.nvim'

@@ -62,9 +62,9 @@ nmap('<leader>xl', '<cmd>TroubleToggle loclist<cr>')
 nmap('<leader>xn', '<cmd>lua require("trouble").next({skip_groups = true, jump = true})<cr>')
 nmap('<leader>xp', '<cmd>lua require("trouble").previous({skip_groups = true, jump = true})<cr>')
 
--- Netrw
-nmap('<leader>e', '<cmd>Explore<cr>')
-nmap('<leader>E', '<cmd>e .<cr>')
+-- File explorer
+nmap('<leader>e', '<cmd>Oil<cr>')
+nmap('<leader>E', '<cmd>Oil .<cr>')
 
 -- Telescope
 nmap('<leader>T', '<cmd>Telescope<cr>')

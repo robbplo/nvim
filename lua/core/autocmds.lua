@@ -84,3 +84,15 @@ autocmd('BufLeave', {
   callback = save_buffer,
   pattern = '*.*'
 })
+
+-- Display current dir in Oil.nvim buffer
+local function oil_current_dir()
+  if vim.bo.filetype == 'oil' then
+    vim.wo.winbar = require('oil').get_current_dir()
+  end
+end
+augroup('OilCurrentDir', { clear = true })
+autocmd('BufEnter', {
+  group = 'OilCurrentDir',
+  callback = oil_current_dir,
+})
