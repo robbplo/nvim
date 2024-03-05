@@ -174,9 +174,23 @@ https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.m
 -- map buffer local keybindings when the language server attaches.
 -- Add your language server below:
 local servers = {
-  'html', 'cssls', 'tsserver', 'emmet_ls', 'templ',
-  'phpactor', 'eslint', 'jsonls', 'rnix', 'docker_compose_language_service',
-  'dockerls', 'gopls', 'lua_ls', 'rust_analyzer', 'yamlls', 'ocamllsp',
+  'bashls',
+  'cssls',
+  'docker_compose_language_service',
+  'dockerls',
+  'emmet_ls',
+  'eslint',
+  'gopls',
+  'html',
+  'jsonls',
+  'lua_ls',
+  'ocamllsp',
+  'phpactor',
+  'rnix',
+  'rust_analyzer',
+  'templ',
+  'tsserver',
+  'yamlls',
 }
 
 -- Call setup
