@@ -93,6 +93,9 @@ return require('packer').startup(function(use)
   ---- Neovim
   use 'folke/neodev.nvim'
 
+  ---- Laravel
+  use 'jwalton512/vim-blade'
+
   ---- Kitty
   use "fladson/vim-kitty"
 
@@ -101,6 +104,9 @@ return require('packer').startup(function(use)
 
   ---- Go templ
   use "joerdav/templ.vim"
+
+  ---- Gleam
+  use "gleam-lang/gleam.vim"
 
   if (packer_bootstrapped) then
     require('packer').sync()

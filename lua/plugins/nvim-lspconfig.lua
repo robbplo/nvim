@@ -156,6 +156,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
+-- Setup neodev plugin
+require("neodev").setup()
 
 --[[
 Language servers setup:
@@ -180,6 +182,7 @@ local servers = {
   'dockerls',
   'emmet_ls',
   'eslint',
+  'gleam',
   'gopls',
   'html',
   'jsonls',
@@ -201,7 +204,11 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-local util = require 'lspconfig.util'
+lspconfig['gleam'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { 'gleam', 'lsp' }
+}
 
 lspconfig['elixirls'].setup {
   on_attach = on_attach,
