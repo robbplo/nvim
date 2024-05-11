@@ -4,6 +4,7 @@ if not status_ok then
 end
 
 -- Experimental Laravel Blade support
+---@diagnostic disable-next-line: inject-field
 require('nvim-treesitter.parsers').get_parser_configs().blade = {
   install_info = {
     url = 'https://github.com/EmranMR/tree-sitter-blade',

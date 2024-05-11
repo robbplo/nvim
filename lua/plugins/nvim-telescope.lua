@@ -8,5 +8,9 @@ telescope.setup {
       i = { ["<c-t>"] = trouble.open_with_trouble },
       n = { ["<c-t>"] = trouble.open_with_trouble },
     },
+    file_ignore_patterns = {
+      "public",
+      "storage",
+    },
   },
 }

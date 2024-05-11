@@ -75,8 +75,8 @@ nmap('<leader>tf', '<cmd>Telescope live_grep<cr>')
 nmap('<leader>tF', '<cmd>lua require("telescope.builtin").live_grep({ no_ignore = true})<cr>')
 
 -- Git
-nmap('<leader>g[', '<cmd>Gitsigns prev_hunk<cr>')
-nmap('<leader>g]', '<cmd>Gitsigns next_hunk<cr>')
+nmap('<leader>gn', '<cmd>Gitsigns next_hunk<cr>')
+nmap('<leader>gp', '<cmd>Gitsigns prev_hunk<cr>')
 nmap('<leader>gb', '<cmd>Gitsigns blame_line<cr>')
 nmap('<leader>gd', '<cmd>Gitsigns diffthis<cr>')
 nmap('<leader>gr', '<cmd>Gitsigns reset_hunk<cr>')

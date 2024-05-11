@@ -191,6 +191,7 @@ local servers = {
   'phpactor',
   'rnix',
   'rust_analyzer',
+  'tailwindcss',
   'templ',
   'tsserver',
   'yamlls',
